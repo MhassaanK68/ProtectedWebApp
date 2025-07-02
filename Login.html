@@ -40,7 +40,7 @@
 
         if (res.ok) {
           const redirectTo = new URLSearchParams(location.search).get("redirect") || "/protected/index.html";
-          window.location.href = redirectTo;
+          window.location.href = "/protected/main.html";
         } else {
           document.getElementById("error").classList.remove("hidden");
         }
