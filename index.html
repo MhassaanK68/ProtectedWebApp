@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to August 18</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .glow {
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+        .countdown-box {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 min-h-screen flex items-center justify-center p-4">
+    <div class="countdown-box p-8 md:p-12 max-w-4xl w-full text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-2 glow">Countdown to</h1>
+        <h2 class="text-3xl md:text-5xl font-bold text-yellow-300 mb-8 glow pulse">August 18, 2024</h2>
+        <p class="text-white text-lg mb-8">Pakistan Standard Time (PKT, UTC+5)</p>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white/10 rounded-xl p-4 backdrop-blur-sm">
+                <div class="text-4xl md:text-6xl font-bold text-yellow-300" id="days">00</div>
+                <div class="text-white mt-2">Days</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4 backdrop-blur-sm">
+                <div class="text-4xl md:text-6xl font-bold text-yellow-300" id="hours">00</div>
+                <div class="text-white mt-2">Hours</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4 backdrop-blur-sm">
+                <div class="text-4xl md:text-6xl font-bold text-yellow-300" id="minutes">00</div>
+                <div class="text-white mt-2">Minutes</div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4 backdrop-blur-sm">
+                <div class="text-4xl md:text-6xl font-bold text-yellow-300" id="seconds">00</div>
+                <div class="text-white mt-2">Seconds</div>
+            </div>
+        </div>
+        
+        <div class="flex justify-center space-x-4 mt-8">
+            <a href="#" class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-full font-semibold transition-all flex items-center">
+                <i class="fas fa-bell mr-2"></i> Remind Me
+            </a>
+            <a href="#" class="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-full font-semibold transition-all flex items-center">
+                <i class="fas fa-share-alt mr-2"></i> Share
+            </a>
+        </div>
+        
+        <div class="mt-12 text-white/70 text-sm">
+            <p>Created with <i class="fas fa-heart text-pink-400"></i> for Pakistan</p>
+        </div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            // Set the target date (August 18, 2024) in Pakistan Time (UTC+5)
+            const targetDate = new Date('2024-08-18T00:00:00+05:00');
+            const now = new Date();
+            
+            // Calculate the difference in milliseconds
+            const diff = targetDate - now;
+            
+            // Calculate days, hours, minutes, seconds
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60);
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000;
+            
+            // Update the DOM
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = Math.floor(hours).toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = Math.floor(minutes).toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = Math.floor(seconds).toString().padStart(2, '0');
+            
+            // If the countdown is over
+            if (diff < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                document.querySelector('h2').textContent = "The wait is over!";
+            }
+        }
+        
+        // Update the countdown every second
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
